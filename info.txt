@@ -1,0 +1,422 @@
+src/
+    |_index.js
+
+
+JSX : JS + XML
+
+
+
+const p = document.createElement('p');
+p.innerText = 'Hello World';
+
+<p> Hello World </p>
+
+
+
+const App = () => {
+    return "Hola Mundo"
+   
+}
+
+const App = () => "Hola Mundo"
+
+
+
+
+App()   ===   <App/>
+
+App(1)
+
+
+
+
+
+COMPONENTES : 
+
+1) Siempre son funciones
+2) Siempre retornan algo
+3) Siempre arrancan en mayuscula
+4) Siempre retornan una sola cosa
+5) Siempre pueden recibir props
+6) Los props son de SOLO LECTURA
+7) Los componentes pueden tener estado (State) : Son variables internas de un componente las cuales pueden mantener su valor a traves del tiempo a pesar de la reejcucion del mismo componente
+8) Los componentes tienen un ciclo de vida separado en tres categorias
+
+    - Mounting : Cuando el componente se monta en el DOM
+    - Updating : Cuando el componente se actualiza
+    - Unmounting : Cuando el componente se desmonta del DOM
+
+9) Los componentes vuelven a renderizar su contenido cuando :
+
+        - Se actualiza el estado
+        - Se recibe un nuevo prop
+        - Su padre se renderiza de nuevo
+        - Cuando cambia el contexto
+
+
+
+CONTAINER VS PRESENENTACIONALES 
+
+
+
+COMPONENTES PRESENENTACIONALES : Son componentes que sirven mas que nada para mostrar algo en pantalla, por lo general no buscan la info en el exterior sino que la reciben como props
+
+COMPONENTES CONTAINER : Son componentes que necesitan de una API externa o la generan/leen de algun lugar para funcionar
+
+
+
+
+
+VANILLA JS
+
+function foo(nombre,edad){
+    nombre = "Otro Nombre"
+    console.log(nombre)
+}
+
+foo("Horacio",32)
+
+
+
+
+
+
+
+
+
+
+
+REACT JS
+
+function Foo(parametros){
+    console.log(nombre)
+}
+
+<Foo nombre="Horacio" edad="32"/>
+
+
+
+
+
+
+DESTRUCTURING
+
+
+
+const arr = [1,2,3]
+
+const uno = arr[0]
+const dos = arr[1]
+const tres = arr[2]
+
+const [uno,dos,tres] = arr
+
+Tenes que crear una constante llamada uno, dos y tres que valgan lo que haya en arr en esa posicion
+
+
+
+
+
+
+const obj = {x:1,y:2,z:3}
+
+const x = obj.x
+const y = obj.y
+const z = obj.z
+
+const {x:x,y:y,z:z} = obj
+const {x:miVariable,y:y,z:z} = obj
+const {x,y,z} = obj
+
+creame una constante llamada x que valga lo que haya en obj en la propiedad x
+
+
+
+OBJECT PROPERTY SHORTHAND
+
+const nombre = "Horacio"
+
+const persona = {
+    nombre : nombre
+}
+
+const persona = { nombre }
+
+
+function foo(){
+    return {saludo : "Hola Mundo"}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const foo = (a) => {
+    return a * 2
+}
+
+
+const foo = () => "Hola Mundo"
+
+const foo = () => ({saludo : "Hola Mundo"})
+
+const foo = a => a * 2
+
+const foo = ({a}) => a * 2
+
+
+IIFE
+
+(Función que se ejecuta a si misma de manera inmediata)()
+
+
+
+
+function foo(){
+    const productos = $.ajax()
+}
+
+foo()
+
+foo()
+
+
+
+
+HOOKS (Ganchos) : Son funciones que se le permiten al componente tener funcionalidad que no es parte de su comportamiento natural. Si o si se ejecutan adentro del componente y no se pueden usar fuera de el. No pueden estar adentro de condicionales, loops, etc. 
+
+
+- useState : Permite crear una variable de estado en el componente. Los estados SOLO PUEDEN CAMBIAR ejecutando la funcion que viene en el hook
+- useReducer 
+- useRef
+
+
+- useEffect 
+- useContext
+
+
+- useCallback
+- useMemo
+
+
+
+class App extends React.Component {
+
+    constructor(){}
+
+    render(){}
+
+    componentDidMount(){}
+
+    componentDidUpdate(){}
+
+    componentWillUnmount(){}
+
+    shouldComponentUpdate(){}
+
+}
+
+
+GARBAGE COLLECTION
+
+function foo(){
+    let a = 1
+    console.log(a)
+}
+
+foo()
+foo()
+
+
+
+const arr = [1,2,3,4,5]
+
+for(let indice = 0; indice < arr.length; indice++){
+    const elemento = arr[indice]
+}
+
+arr.forEach((elemento,indice) => {
+    console.log(elemento,indice)
+})
+
+const r = arr.map((elemento,indice)=>{
+    return elemento + 1
+})
+
+console.log(r) // [2,3,4,5,6]
+
+
+Promesa : Objecto que representa una operación asincrona que notifica cuando termina bien o mal
+
+new Promise((res,rej)=>{
+
+})
+
+
+$.ajax().then().catch()
+
+fetch().then().catch()
+
+algunaFuncion().then().catch()
+
+
+
+XMLHttpRequest (XHR) : API WEB para pedir/enviar información de un servidor
+AJAX : Async Javascript And XML (sigla que invento jquery ?)
+FETCH : API WEB para pedir/enviar información de un servidor
+AXIOS : Es una libreria moderna que implementa ajax
+API REST : JSON Representation State Transfer
+
+FTP - TCP / IP - HTTPS - SSH - SMTP - POP - IMAP 
+HTTP : Protocolo de transferencia de hipertexto
+
+
+CLIENTE
+
+url/ip   -   metodo/verbo (get-post-put-patch-delete-et al)  - version
+header
+body/payload
+
+
+
+SERVIDOR
+
+codigo - mensaje - version
+header
+    content-type : application/json
+    content-length : 1000
+body/payload
+
+
+
+fetch("http://jsonplaceholder.typicode.com/users")
+.then((resultado)=>{
+
+    console.log("Todo bien")
+    console.log(resultado) 
+    const respuesta_formateada = resultado.json()
+    return respuesta_formateada    
+})
+.then((usuarios)=>{
+    console.log(usuarios)
+})
+.catch((error)=>{
+    alert("Ups hubo un problema, vuelva a intentarlo")
+    console.log(error)
+})
+
+
+BrowserRouter : Router que se usa en el navegador con la API History
+HashRouter : Router que se usa en el navegador con la API Location
+MemoryRouter : Router que guarda la navegacion en memoria
+StaticRouter : Router que se usa en el servidor (SSR)
+NativeRouter : Route que se usa en mobile
+
+
+
+
+
+fetch => Promise {}
+
+fetch.then() => Response {}
+
+Response {} => Response.json()
+
+Response.json()  => Promise {}
+
+Si tenes una promesa suelta : continuas con un .then
+Si tenes una promesa adentro de un .then : retornas esa promesa y continuas con un .then abajo
+
+
+Web Services : SOAP, REST, GraphQL, etc.
+
+
+
+
+
+IMPLEMENTACION DE CONTEXTO : 
+1) Crear el contexto con createContext
+2) Sacar el Provider de adentro del contexto
+3) Export de contexto y Provider
+
+LEER EL CONTEXTO
+4) Vas al componente donde queres leer algo del contexto
+5) Traes el hook useContext
+6) Traes el objeto contexto
+7) useas el hook como useContext(contexto)
+
+PATRON PROVIDER / CAMBIAR EL CONTEXTO
+8) Crear un componente nuevo que va a usar el contexto
+9) En el retorno usas el Provider con su prop value (que setea el valor del contexto)
+
+
+
+
+useMemo : Memoriza una variable interna de un componente si no es funcion
+useCallback : Memoriza una función interna de un componente si es funcion
+
+useEffect(fn,array)
+
+memo (HoC) : Memoriza un componente
+
+
+
+Base de datos : Es un conjunto de datos que se pueden consultar, modificar, etc.
+RELACIONALES / NO RELACIONALES : SQL - MySQL - PostgreSQL / MongoDB - Firestore - Cassandra - etc.
+
+ABML : Alta, Baja, Modificación, Listado
+CRUD : Create, Read, Update, Delete
+
+
+
+
+
+ENVIROMENT : 
+
+url_db
+user_db
+pass_db
+port_db
+
+
+
+src/
+  |_index.js
+  |_client
+    |_ui/
+      |_layout/
+        |_App.js
+        |_Header.js
+        |_Footer.js
+        |_Main.js
+        |_NavBar.js
+      |_components/
+        |_Button.js
+      |_pages/
+        |_Home.js
+        |_About.js
+        |_Contact.js
+        |_Login.js
+      |_styles/
+        |_index.scss
+        |_variables.scss
+      |_utils/
+        |_servicios.js
+    |_api/
+      |_redux/
+      |_Providers/
+        |_AuthProvider.js
+        |_ThemeProvider.js
+        |_CarritoProvider.js
+        |_VentasProvider.js
+  |_server
